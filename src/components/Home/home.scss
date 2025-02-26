@@ -1,0 +1,427 @@
+:root {
+    --primary-color: hsl(199, 100%, 33%);
+    --secondary-color: hsl(187, 85%, 43%);
+    --gradient-color: linear-gradient(to right, hsl(199, 100%, 33%), hsl(187, 85%, 43%));
+    --white-color: hsl(0, 0%, 100%);
+    --black-color: hsl(201, 33%, 16%);
+    --text-color: hsl(240, 4%, 36%);
+    --whiteColorDeam: hsl(0, 0%, 93%);
+    --greyText: rgb(190, 190, 190);
+    --inputColor: rgb(239, 239, 239);
+    --bodyColor: rgb(240, 240, 246);
+    --cardBG: rgb(255, 255, 235);
+  }
+  
+  .home {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    min-height: 100vh;
+  
+    .overlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: rgba(47, 106, 127, 0.7);
+      top: 0;
+      z-index: 1;
+      mix-blend-mode: hard-light;
+      animation: fadeInOverlay 1.5s ease-in-out forwards;
+    }
+  
+    video {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      object-fit: cover;
+      z-index: 0;
+      animation: scaleInVideo 2s ease-out forwards;
+    }
+  
+    .homeContent {
+      width: 100%;
+      max-width: 1200px;
+      padding: 8rem 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      align-items: center;
+      color: var(--white-color);
+      z-index: 100;
+      position: relative;
+  
+      .textDiv {
+        padding: 2rem 0;
+        text-align: center;
+  
+        .smallText {
+          font-size: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          opacity: 0;
+          animation: slideUpText 1s ease-out 0.5s forwards;
+        }
+  
+        .homeTitle {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-top: 1rem;
+          text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+          opacity: 0;
+          animation: slideUpText 1s ease-out 0.7s forwards;
+  
+          &::after {
+            content: " ";
+            background: var(--secondary-color);
+            height: 5px;
+            width: 150px;
+            display: block;
+            margin: 0.5rem auto;
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: center;
+            animation: growLine 0.8s ease-out 1.2s forwards;
+          }
+        }
+      }
+  
+      .cardDiv {
+        padding: 2rem;
+        background: var(--white-color);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: grid;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 600px;
+        opacity: 0;
+        transform: translateY(50px);
+        animation: slideUpCard 1s ease-out 1s forwards;
+  
+        label {
+          color: var(--text-color);
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+  
+        .input {
+          height: 40px;
+          padding: 0 1rem;
+          background: var(--inputColor);
+          border-radius: 3rem;
+          display: flex;
+          align-items: center;
+          transition: transform 0.3s ease;
+  
+          &:hover {
+            transform: scale(1.02);
+          }
+  
+          input {
+            background: none;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.9rem;
+  
+            &::placeholder {
+              color: var(--greyText);
+            }
+          }
+  
+          .icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+  
+            &:hover {
+              transform: rotate(15deg);
+            }
+          }
+        }
+  
+        .label_total {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+  
+          .total {
+            color: var(--text-color);
+            font-size: 1.2rem;
+          }
+        }
+  
+        .searchOptions {
+          background: var(--gradient-color);
+          padding: 0.5rem 1rem;
+          border-radius: 3rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          cursor: pointer;
+          justify-self: center;
+          opacity: 0;
+          animation: fadeInButton 1s ease-out 1.5s forwards;
+  
+          .icon {
+            font-size: 1.2rem;
+            color: var(--white-color);
+            transition: transform 0.3s ease;
+  
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+  
+          span {
+            font-size: 0.9rem;
+            color: var(--white-color);
+            font-weight: 600;
+          }
+        }
+      }
+  
+      .homeFooterIcons {
+        display: flex;
+        justify-content: center; /* Center all icons */
+        align-items: center; /* Vertically align in one line */
+        width: 100%;
+        max-width: 600px;
+        padding: 1rem 0;
+        gap: 2rem; /* Even spacing between icons */
+  
+        .icon {
+          font-size: 1.5rem;
+          color: var(--white-color);
+          opacity: 0;
+          animation: bounceInIcons 0.8s ease-out forwards;
+          transition: transform 0.3s ease, color 0.3s ease;
+  
+          &:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+          }
+  
+          /* Staggered animation for each icon */
+          &:nth-child(1) { animation-delay: 1.8s; }
+          &:nth-child(2) { animation-delay: 1.9s; }
+          &:nth-child(3) { animation-delay: 2s; }
+          &:nth-child(4) { animation-delay: 2.1s; }
+          &:nth-child(5) { animation-delay: 2.2s; }
+        }
+  
+        /* Remove unnecessary grouping */
+        .rightIcons, .leftIcons {
+          display: none; /* Hide these containers since all icons are now direct children */
+        }
+      }
+    }
+  
+    /* Animation Keyframes */
+    @keyframes fadeInOverlay {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  
+    @keyframes scaleInVideo {
+      0% { transform: scale(1.05); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  
+    @keyframes slideUpText {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  
+    @keyframes growLine {
+      0% { transform: scaleX(0); }
+      100% { transform: scaleX(1); }
+    }
+  
+    @keyframes slideUpCard {
+      0% { opacity: 0; transform: translateY(50px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  
+    @keyframes fadeInButton {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  
+    @keyframes bounceInIcons {
+      0% { opacity: 0; transform: scale(0.5); }
+      60% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  
+    /* Tablet (max-width: 1024px) */
+    @media (max-width: 1024px) {
+      .homeContent {
+        padding: 6rem 1.5rem 2rem;
+  
+        .textDiv {
+          .homeTitle {
+            font-size: 2rem;
+  
+            &::after {
+              width: 120px;
+            }
+          }
+        }
+  
+        .cardDiv {
+          max-width: 500px;
+          padding: 1.5rem;
+        }
+  
+        .homeFooterIcons {
+          gap: 1.5rem;
+  
+          .icon {
+            font-size: 1.4rem;
+          }
+        }
+      }
+    }
+  
+    /* Mobile (max-width: 768px) */
+    @media (max-width: 768px) {
+      .homeContent {
+        padding: 4rem 1rem 1.5rem;
+  
+        .textDiv {
+          .smallText {
+            font-size: 0.9rem;
+          }
+  
+          .homeTitle {
+            font-size: 1.8rem;
+  
+            &::after {
+              width: 100px;
+            }
+          }
+        }
+  
+        .cardDiv {
+          max-width: 400px;
+          padding: 1rem;
+          gap: 1rem;
+  
+          label {
+            font-size: 0.85rem;
+          }
+  
+          .input {
+            height: 36px;
+  
+            input {
+              font-size: 0.85rem;
+            }
+  
+            .icon {
+              font-size: 1rem;
+            }
+          }
+  
+          .label_total .total {
+            font-size: 1rem;
+          }
+  
+          .searchOptions {
+            padding: 0.4rem 0.8rem;
+  
+            .icon {
+              font-size: 1rem;
+            }
+  
+            span {
+              font-size: 0.85rem;
+            }
+          }
+        }
+  
+        .homeFooterIcons {
+          max-width: 400px;
+          gap: 1rem;
+  
+          .icon {
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
+  
+    /* Small Mobile (max-width: 480px) */
+    @media (max-width: 480px) {
+      .homeContent {
+        padding: 3rem 0.5rem 1rem;
+  
+        .textDiv {
+          .smallText {
+            font-size: 0.8rem;
+          }
+  
+          .homeTitle {
+            font-size: 1.5rem;
+  
+            &::after {
+              width: 80px;
+            }
+          }
+        }
+  
+        .cardDiv {
+          max-width: 300px;
+          padding: 0.8rem;
+          gap: 0.8rem;
+  
+          label {
+            font-size: 0.8rem;
+          }
+  
+          .input {
+            height: 32px;
+  
+            input {
+              font-size: 0.8rem;
+            }
+  
+            .icon {
+              font-size: 0.9rem;
+            }
+          }
+  
+          .label_total .total {
+            font-size: 0.9rem;
+          }
+  
+          .searchOptions {
+            padding: 0.3rem 0.6rem;
+  
+            .icon {
+              font-size: 0.9rem;
+            }
+  
+            span {
+              font-size: 0.8rem;
+            }
+          }
+        }
+  
+        .homeFooterIcons {
+          max-width: 300px;
+          gap: 0.8rem;
+  
+          .icon {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }

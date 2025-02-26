@@ -1,0 +1,443 @@
+:root {
+  --primary-color: hsl(199, 100%, 33%);
+  --secondary-color: hsl(187, 85%, 43%);
+  --gradient-color: linear-gradient(to right, hsl(199, 100%, 33%), hsl(187, 85%, 43%));
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(201, 33%, 16%);
+  --text-color: hsl(240, 4%, 36%);
+  --whiteColorDeam: hsl(0, 0%, 93%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(255, 255, 235);
+  --cardHover: rgb(255, 255, 255);
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+.main {
+  width: 100%;
+  padding: 4rem 0;
+
+  .secTitle {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    .title {
+      position: relative;
+      color: var(--text-color);
+      font-size: 2rem;
+      font-weight: 600;
+
+      &::after {
+        content: " ";
+        background: var(--secondary-color);
+        height: 5px;
+        width: 120px;
+        display: block;
+        margin: 0.5rem auto;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .secContent {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 0 2rem;
+    opacity: 0; /* Start hidden for smooth grid entry */
+    animation: fadeInGrid 0.5s ease-out forwards; /* Fade in grid container */
+
+    .singleDestination {
+      background: var(--cardBG);
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(140, 140, 141, 0.3);
+      overflow: hidden;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(85, 85, 114, 0.5);
+        background: var(--cardHover);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Hover transitions only */
+      }
+
+      .imageDiv {
+        height: 200px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+
+        .skeletonLoader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%; /* Match imageDiv height */
+          background: #f0f0f0;
+          animation: pulse 1.5s infinite ease-in-out;
+
+          .skeletonImage {
+            width: 100%;
+            height: 100%;
+            background: #e0e0e0;
+          }
+        }
+
+        @keyframes pulse {
+          0% { opacity: 1; }
+          50% { opacity: 0.6; }
+          100% { opacity: 1; }
+        }
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          transition: opacity 0.5s ease-in; /* Smooth fade-in for images */
+          opacity: 0; /* Start hidden */
+        }
+
+        img.loaded {
+          opacity: 1; /* Fade in when loaded */
+        }
+
+        &:hover {
+          img {
+            transform: scale(1.1); /* Retained hover effect */
+            transition: transform 2s ease;
+          }
+        }
+      }
+
+      .cardInfo {
+        padding: 1.5rem;
+
+        .destTitle {
+          color: var(--black-color);
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+        }
+
+        .continent {
+          display: flex;
+          gap: 0.5rem;
+          margin-bottom: 0.75rem;
+
+          .icon {
+            color: var(--text-color);
+            font-size: 18px;
+          }
+
+          .name {
+            color: var(--text-color);
+            font-weight: 400;
+            font-size: 14px;
+          }
+        }
+
+        .fees {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem;
+          margin: 1rem 0;
+          border-top: 1.5px solid var(--greyText);
+          border-bottom: 1.5px solid var(--greyText);
+
+          .grade {
+            color: var(--text-color);
+            max-width: 100px;
+            line-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            &:hover::after {
+              content: attr(title);
+              position: absolute;
+              bottom: 100%;
+              left: 50%;
+              transform: translateX(-50%);
+              background: var(--black-color);
+              color: var(--white-color);
+              padding: 0.5rem;
+              border-radius: 4px;
+              font-size: 12px;
+              white-space: nowrap;
+              z-index: 10;
+            }
+
+            span {
+              display: flex;
+              align-items: center;
+              gap: 0.25rem;
+
+              small {
+                text-align: center;
+                background: var(--gradient-color);
+                border-radius: 1rem;
+                color: var(--white-color);
+                padding: 1px 10px;
+                font-size: 10px;
+              }
+            }
+          }
+
+          .price {
+            font-size: 1.5rem;
+            color: var(--black-color);
+            font-weight: 600;
+
+            h5 {
+              margin: 0;
+            }
+          }
+        }
+
+        .desc {
+          font-size: 14px;
+          color: var(--text-color);
+          font-weight: 500;
+          margin-bottom: 1rem;
+          line-height: 1.5;
+        }
+
+        .btn {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.75rem 1rem;
+          background: var(--gradient-color);
+          border: none;
+          border-radius: 0.5rem;
+          color: var(--white-color);
+          font-weight: 600;
+          cursor: pointer;
+          width: 100%;
+          transition: background 0.3s ease, transform 0.2s ease;
+
+          &:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+          }
+
+          .icon {
+            font-size: 18px;
+            margin-left: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  /* Animation for grid container */
+  @keyframes fadeInGrid {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) { /* Tablet */
+    .main {
+      padding: 3rem 0;
+
+      .secContent {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        padding: 0 1.5rem;
+
+        .singleDestination {
+          .imageDiv {
+            height: 180px;
+          }
+
+          .cardInfo {
+            padding: 1.2rem;
+
+            .destTitle {
+              font-size: 1.1rem;
+            }
+
+            .continent {
+              .name {
+                font-size: 13px;
+              }
+            }
+
+            .fees {
+              padding: 0.9rem;
+              margin: 0.9rem 0;
+
+              .price {
+                font-size: 1.3rem;
+              }
+            }
+
+            .desc {
+              font-size: 13px;
+            }
+
+            .btn {
+              padding: 0.6rem 0.9rem;
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) { /* Mobile */
+    .main {
+      padding: 2rem 0;
+
+      .secTitle {
+        .title {
+          font-size: 1.5rem;
+
+          &::after {
+            width: 80px;
+          }
+        }
+      }
+
+      .secContent {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.2rem;
+        padding: 0 1rem;
+
+        .singleDestination {
+          .imageDiv {
+            height: 150px;
+          }
+
+          .cardInfo {
+            padding: 0.75rem;
+
+            .destTitle {
+              font-size: 1rem;
+            }
+
+            .continent {
+              .name {
+                font-size: 12px;
+              }
+            }
+
+            .fees {
+              padding: 0.75rem;
+              margin: 0.75rem 0;
+
+              .price {
+                font-size: 1.1rem;
+              }
+
+              .grade {
+                max-width: 80px;
+
+                small {
+                  font-size: 9px;
+                  padding: 1px 8px;
+                }
+              }
+            }
+
+            .desc {
+              font-size: 12px;
+            }
+
+            .btn {
+              padding: 0.5rem 0.75rem;
+              font-size: 0.8rem;
+
+              .icon {
+                font-size: 16px;
+                margin-left: 0.3rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) { /* Small Mobile */
+    .main {
+      padding: 1.5rem 0;
+
+      .secTitle {
+        .title {
+          font-size: 1.2rem;
+
+          &::after {
+            width: 60px;
+          }
+        }
+      }
+
+      .secContent {
+        grid-template-columns: 1fr; /* Stack cards vertically */
+        gap: 1rem;
+        padding: 0 0.5rem;
+
+        .singleDestination {
+          .imageDiv {
+            height: 120px;
+          }
+
+          .cardInfo {
+            padding: 0.5rem;
+
+            .destTitle {
+              font-size: 0.9rem;
+            }
+
+            .continent {
+              .name {
+                font-size: 11px;
+              }
+            }
+
+            .fees {
+              padding: 0.5rem;
+              margin: 0.5rem 0;
+
+              .price {
+                font-size: 1rem;
+              }
+
+              .grade {
+                max-width: 70px;
+
+                small {
+                  font-size: 8px;
+                  padding: 1px 6px;
+                }
+              }
+            }
+
+            .desc {
+              font-size: 11px;
+            }
+
+            .btn {
+              padding: 0.4rem 0.5rem;
+              font-size: 0.7rem;
+
+              .icon {
+                font-size: 14px;
+                margin-left: 0.2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
